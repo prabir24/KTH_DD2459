@@ -9,7 +9,7 @@ public class BinarySearch {
 	 * 
 	 * @ensures true | false
 	 */
-	public boolean search(int[] sorted_arr, int element) {
+	public int search(int[] sorted_arr, int element) {
 		int left = 0;
 		int right = sorted_arr.length - 1;
 		int loc = (left + right) / 2;
@@ -24,6 +24,15 @@ public class BinarySearch {
 			}
 		}
 		if (sorted_arr[loc] == element)
+			return loc;
+		else
+			return -1;
+	}
+	
+	public boolean membership(int[] sorted_arr, int key)
+	{
+		int index = search(sorted_arr, key);
+		if(index >= 0)
 			return true;
 		else
 			return false;
