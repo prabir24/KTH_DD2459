@@ -23,7 +23,7 @@ public class Sorting {
 
 		pivot = elements[high];
 
-		var_1 = (low - 1);
+		var_1 = (low -1);
 		for (var_2 = low; var_2 < high; var_2++) {
 
 			if (elements[var_2] <= pivot) {
@@ -31,7 +31,7 @@ public class Sorting {
 
 				temp = elements[var_1];
 				elements[var_1] = elements[var_2];
-				elements[var_2] = temp;
+				elements[var_2] = temp;           //Comment this for Error Injection
 			}
 		}
 
@@ -42,23 +42,6 @@ public class Sorting {
 		return var_1 + 1;
 	}
 
-	/*
-	 * @requires true
-	 * 
-	 * @ensures (\forall int i,j; 
-	 * 			0 <= i & i < j & j < elements.length; 
-	 * 			elements[i] <= elements[j]);
-	 */
-	
-	/* \requires A != null
-	 * \ensures \forall int i; 0<= i < A.length; \forall int j; 0<= j < A.length; 
-	 * 			i <= j => A[i] <= A[j]
-	 * 
-	 * \ensures \forall int i; 0<= i < A.length-1; A[i] <= A[i+1];
-	 * 
-	 * & A.length == \old (A).length
-	 * \exists permutation : [0 ... A.length-1] -bij-> [0 ... A.length - 1] s.t. A[i] = \old(A) [permutation (i)]
-	 */
 	public void quick_sort(int[] elements, int low, int high) {
 		if (low < high) {
 			int pivot = quick_sort_1(elements, low, high);
@@ -71,9 +54,10 @@ public class Sorting {
 	public void sort(int[] elements)
 	{
 		if(elements == null)
-			throw new IllegalArgumentException("Array to be sorted can not be null");
+			throw new IllegalArgumentException("Array to be sorted can not be null"); // Error Injection
 			
-		quick_sort(elements, 0, elements.length - 1);
+		//quick_sort(elements, 0, elements.length - 1);
+		quick_sort(elements, 0, elements.length - 2); //Uncomment this and comment above line for Error Injection
 	}
 	
 	public boolean checkSort(int[] elements)
@@ -81,12 +65,10 @@ public class Sorting {
 		int i = 0;
 		for( i = 0; i < elements.length - 1; i++)
 		{
-			if(elements[i] <= elements[i+1])
-				continue;
-			else
+			if(elements[i] > elements[i+1]) 			
 				break;
 		}
-		if(i == elements.length - 1)
+		if((elements.length == 0) || (i == elements.length - 1))
 			return true;
 		else
 			return false;
